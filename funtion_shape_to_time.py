@@ -9,5 +9,3 @@ def shape_to_time(shape):
         "p": -0.125
     }
     return dict_shape[shape]
-
-    print(shape_to_time("r"))
