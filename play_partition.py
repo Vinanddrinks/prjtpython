@@ -1,13 +1,14 @@
 #!/usr/bin/python
 import simpleaudio as sa
 import numpy as np
-
+import note_to_hertz
+import funtion_shape_to_time
 partition = "SOLc p Zc SOLn LAn SOLn DOn Zc SIb SOLc p Zc SOLn LAn SOLn REn Zc DOb SOLc p Zc SOLn SOLn MIn DOn Zc SIn LAn FAc p Zc FAn MIn DOn REn DOr"
 
 
 def play_note(note, shape):
     frequency_note = note_to_hertz(note)
-    duration = shape_to_time(shape)
+    duration = funtion_shape_to_time(shape)
     note_array = np.linspace(0, duration, duration*44100, False)
     # we create the note sine wave
     note = np.sin(frequency_note*note_array*2*np.pi)
