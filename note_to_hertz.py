@@ -6,6 +6,7 @@ def note_to_hertz(note):
         "FA" : 352,
         "SOL": 396,
         "LA" : 440,
-        "Si" : 495,
+        "SI" : 495,
+        "Z"  : 0,
     }
     return dic[note]
