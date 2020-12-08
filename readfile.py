@@ -12,5 +12,10 @@ def readfiletxt():
         ln += 1
     partitions.close()
     return partidic
-
+#retourne le dictionaire stocké dans p data.json
+def readfilejson():
+    import json
+    with open ('pdata.json') as json_file:
+        data = json.load(json_file)
+        return data
 
