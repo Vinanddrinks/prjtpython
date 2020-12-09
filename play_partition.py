@@ -57,10 +57,6 @@ def play_note(note, shape):
     play_sound.wait_done()
 
 
-play_note("SOL", 'c')
-new_partition=['SOL', 'c', 'p', 'Z', 'c', 'SOL', 'n', 'LA', 'n', 'SOL', 'n', 'DO', 'n', 'Z', 'c', 'SI', 'b', 'SOL', 'c', 'p', 'Z', 'c', 'SOL', 'n', 'LA', 'n', 'SOL', 'n', 'RE', 'n', 'Z', 'c', 'DO', 'b', 'SOL', 'c', 'p', 'Z', 'c', 'SOL', 'n', 'SOL', 'n', 'MI', 'n', 'DO', 'n', 'Z', 'c', 'SI', 'n', 'LA', 'n', 'FA', 'c', 'p', 'Z', 'c', 'FA', 'n', 'MI', 'n', 'DO', 'n', 'RE', 'n', 'DO', 'r']
-
-
 def play_partition(partition):
     note_list = ["SOL", "LA", "SI", "RE", "MI", "FA", "DO"]
     note_shape = ["r", "b", "n", "c", "p"]
