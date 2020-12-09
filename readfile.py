@@ -19,3 +19,8 @@ def readfilejson():
         data = json.load(json_file)
         return data
 
+#écris un dictionnaire dans pdata.json
+def writejson(partitions):
+    import json
+    with open("pdata.json", "w") as write_file:
+        json.dump(data, write_file)
