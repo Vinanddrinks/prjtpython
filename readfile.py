@@ -23,4 +23,4 @@ def readfilejson():
 def writejson(partitions):
     import json
     with open("pdata.json", "w") as write_file:
-        json.dump(data, write_file)
+        json.dump(partitions, write_file)
