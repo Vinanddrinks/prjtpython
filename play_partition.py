@@ -1,7 +1,8 @@
 #!/usr/bin/python
 import simpleaudio as sa
 import numpy as np
-partition = "SOLc p Zc SOLn LAn SOLn DOn Zc SIb SOLc p Zc SOLn LAn SOLn REn Zc DOb SOLc p Zc SOLn SOLn MIn DOn Zc SIn LAn FAc p Zc FAn MIn DOn REn DOr"
+from time import sleep
+partition = "MIn MIn MIb MIn MIn MIb MIn SOLn DOn REn MIb p Zn FAn FAn FAb FAn MIn MIb MIn REn REn MIn REb SOLb Zc MIn MIn MIb MIn MIn MIb MIn SOLn DOn REn MIb p Zn FAn FAn FAb FAn MIn MIb SOLn SOLn FAn REn DOb p Zc"
 
 def note_to_hertz(note):
     dic ={
@@ -12,7 +13,7 @@ def note_to_hertz(note):
         "SOL": 396,
         "LA" : 440,
         "SI" : 495,
-        "Z"  : 0,
+        "Z"  : -1,
     }
     return dic[note]
 
@@ -46,7 +47,7 @@ def partition_to_list(partition):
 
 def play_note(note, shape):
     frequency_note = note_to_hertz(note)
-    duration = shape_to_time(shape)
+    duration = np.abs(shape_to_time(shape))
     note_array = np.linspace(0, duration, int(duration*44100), False)
     # we create the note sine wave
     note = np.sin(frequency_note*note_array*2*np.pi)
@@ -61,11 +62,15 @@ def play_partition(partition):
     note_list = ["SOL", "LA", "SI", "RE", "MI", "FA", "DO"]
     note_shape = ["r", "b", "n", "c", "p"]
     partition = partition_to_list(partition)
-    for element in partition:
+    for index, element in enumerate(partition):
         if element in note_list:
-            return play_note(element, element)
+            play_note(element, partition[index+1])
         if element == "p":
-            return play_note('Z', "p")
+            sleep(0.125)
+        if element == "Z":
+            sleep_time = shape_to_time(partition[index+1])
+            sleep(sleep_time)
+    return 0
 
 
 play_partition(partition)
