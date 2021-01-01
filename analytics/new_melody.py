@@ -34,11 +34,11 @@ def successor_notes(note_list):
     }
     for i in range(len(note_list) - 1):
         if note_list[i] not in succdic:
-            succdic[note_list[i]] = note_list[i+1]
+            succdic[note_list[i]] = ""
         if note_list[i] in succdic:
-            succdic[note_list[i]] = note_list[i+1]
+            succdic[note_list[i]] += str(note_list[i+1]) + " "
     return succdic
 
 
-
+print(note_list)
 print(successor_notes(note_list))
