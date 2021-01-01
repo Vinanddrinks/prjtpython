@@ -13,14 +13,32 @@ def note_occurrences(partition):
             new_partition = new_partition + character
         if character == ' ':
             new_partition = new_partition + character
-    partition_list = new_partition.split()
-    for element in partition_list:
+    new_partition = new_partition + " END"
+    # we add this END value to help us avoid index errors later when coding for the successors notes
+    note_list = new_partition.split()
+    for element in note_list:
         if element not in dicnote:
-            dicnote[element] = 1
-            # creates a key and assigns 1 to its value
+            dicnote[element] = 0
+            # creates a key and assigns 0 to its value
         if element in dicnote:
             dicnote[element] += 1
             # if element is already in dic increment the occurrences numbers by 1
-    return partition_list, dicnote
+    return note_list, dicnote
 
-print(note_occurrences(partition))
+
+note_list, dicnote = note_occurrences(partition)
+
+def successor_notes(note_list):
+    succdic = {
+
+    }
+    for i in range(len(note_list) - 1):
+        if note_list[i] not in succdic:
+            succdic[note_list[i]] = note_list[i+1]
+        if note_list[i] in succdic:
+            succdic[note_list[i]] = note_list[i+1]
+    return succdic
+
+
+
+print(successor_notes(note_list))
