@@ -15,4 +15,11 @@ if Path('pdata.json').is_file():
 else:
     partidic = readfiletxt()
 # end database initialization
-
+#tkinter display
+# main window settings
+root = tk.Tk()
+root.title("Music and Statistic")
+root.geometry("1080x720")
+root.minsize(480,360)
+root.iconbitmap("root.ico")
+# end main widow settings
