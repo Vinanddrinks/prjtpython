@@ -1,44 +1,57 @@
 #!/usr/bin/python
+from random import randint
+from random import choice
 
 partition = "SOLc SOLc SOLc LAn SOLn REn SOLc SOLc SOLc LAn SOLn REn DOc SIc LAc SIn DOc SIn LAn DOc SIc LAc SIn DOc SIn LAn SOLc SOLc SOLc LAn SOLn REn SOLc SOLc SOLc LAn SOLn REn"
 
 
-def note_occurrences(partition):
-    dicnote={
-
+def dicnotes(partition):
+    dicnote = {
+        'DO': [], 'RE': [], 'MI': [], 'FA': [], 'SO': [], 'LA': [], 'SI': []
     }
-    new_partition = ""
-    for character in partition:
-        if ascii("A") <= ascii(character) <= ascii('Z'):
-            new_partition = new_partition + character
-        if character == ' ':
-            new_partition = new_partition + character
-    new_partition = new_partition + " END"
-    # we add this END value to help us avoid index errors later when coding for the successors notes
-    note_list = new_partition.split()
-    for element in note_list:
-        if element not in dicnote:
-            dicnote[element] = 0
-            # creates a key and assigns 0 to its value
-        if element in dicnote:
-            dicnote[element] += 1
-            # if element is already in dic increment the occurrences numbers by 1
-    return note_list, dicnote
-
-
-note_list, dicnote = note_occurrences(partition)
-
-def successor_notes(note_list):
     succdic = {
-
+        'DO': [], 'RE': [], 'MI': [], 'FA': [], 'SO': [], 'LA': [], 'SI': []
     }
-    for i in range(len(note_list) - 1):
-        if note_list[i] not in succdic:
-            succdic[note_list[i]] = ""
-        if note_list[i] in succdic:
-            succdic[note_list[i]] += str(note_list[i+1]) + " "
-    return succdic
+    split_part = partition.split(" ")
+    for idx, note in enumerate(split_part):
+        if note[:2] in dicnote:
+            dicnote[note[:2]].append(note)
+            if idx != len(split_part)-1:
+                succdic[note[:2]].append(split_part[idx+1])
+    return dicnote, succdic
 
 
-print(note_list)
-print(successor_notes(note_list))
+def markov_partition(partition):
+    new_song = []
+    dicnote, succdic = dicnotes(partition)
+    lenght = len(dicnote["DO"])
+    most_common_note = ""
+    for note in dicnote:
+        if lenght <= len(dicnote[note]):
+            lenght = len(dicnote[note])
+            most_common_note = note
+    # Finds the most common note and its value
+    randomvalue = randint(0, len(dicnote[most_common_note])-1)
+    note = dicnote[most_common_note][randomvalue]
+    dicnote[note[:2]].remove(note)
+    while dicnote:
+        if note[:2] in dicnote:
+            randomvalue = randint(0, len(dicnote[note[:2]]) - 1)
+            note = dicnote[note[:2]][randomvalue]
+        else:
+            key = choice(list(dicnote))
+            randomvalue = randint(0, len(dicnote[key]) - 1)
+            note = dicnote[key][randomvalue]
+        dicnote[note[:2]].remove(note)
+        note = succdic[note[:2]][randint(0, len(succdic[note[:2]]) - 1)]
+        new_song.append(note)
+        for key, value in list(dicnote.items()):
+            if not value:
+                del dicnote[key]
+                del succdic[key]
+    return new_song
+
+
+new_song = markov_partition(partition)
+print(new_song)
+print(len(new_song))
