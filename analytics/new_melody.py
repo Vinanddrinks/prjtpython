@@ -4,7 +4,8 @@ from random import choice
 
 partition = "SOLc SOLc SOLc LAn SOLn REn SOLc SOLc SOLc LAn SOLn REn DOc SIc LAc SIn DOc SIn LAn DOc SIc LAc SIn DOc SIn LAn SOLc SOLc SOLc LAn SOLn REn SOLc SOLc SOLc LAn SOLn REn"
 
-
+# This function creates 2 dictionaries that will help us apply markov law, one for the successive notes and one for
+# the notes themselves and their number of occurrences
 def dicnotes(partition):
     dicnote = {
         'DO': [], 'RE': [], 'MI': [], 'FA': [], 'SO': [], 'LA': [], 'SI': []
@@ -15,12 +16,17 @@ def dicnotes(partition):
     split_part = partition.split(" ")
     for idx, note in enumerate(split_part):
         if note[:2] in dicnote:
+            # we navigate the list using a slice of :2 to make it simpler to find notes by only comparing the first 2
+            # letters and use the enumerate to avoid index errors
             dicnote[note[:2]].append(note)
             if idx != len(split_part)-1:
                 succdic[note[:2]].append(split_part[idx+1])
     return dicnote, succdic
 
 
+# We will now use our dictionaries to apply markov law we will check on both dictionaries the presence of the notes and
+# remove from the occurrences dictionary a note once we use it. When the dictionary is empty we have a new partition
+# that follows markov's law
 def markov_partition(partition):
     new_song = []
     dicnote, succdic = dicnotes(partition)
@@ -35,6 +41,7 @@ def markov_partition(partition):
     note = dicnote[most_common_note][randomvalue]
     dicnote[note[:2]].remove(note)
     while dicnote:
+        # Main loop to create markov's partition
         if note[:2] in dicnote:
             randomvalue = randint(0, len(dicnote[note[:2]]) - 1)
             note = dicnote[note[:2]][randomvalue]
