@@ -2,7 +2,6 @@
 import simpleaudio as sa
 import numpy as np
 from time import sleep
-partition = "SOLc SOLc SOLc LAn SOLn REn SOLc SOLc SOLc LAn SOLn REn DOc SIc LAc SIn DOc SIn LAn DOc SIc LAc SIn DOc SIn LAn SOLc SOLc SOLc LAn SOLn REn SOLc SOLc SOLc LAn SOLn REn"
 
 def note_to_hertz(note):
     dic ={
@@ -72,8 +71,6 @@ def play_partition(partition):
             sleep(sleep_time)
     return 0
 
-
-play_partition(partition)
 
 
 

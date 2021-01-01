@@ -23,3 +23,4 @@ root.geometry("1080x720")
 root.minsize(480,360)
 root.iconbitmap("root.ico")
 # end main widow settings
+root.mainloop() # indicateur de boucle sur la fenêtre principale
