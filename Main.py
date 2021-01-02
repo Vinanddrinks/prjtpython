@@ -58,8 +58,17 @@ def play():
 # markov
 def Markov():
     global partidic
+    keys =[]
+    for key in partidic:
+        keys.append(key) 
     w = tk.Tk()
     w.title("Markov derivation")
+    f = tk.Frame(w,bg = "#7EAFE0")
+    f.pack(expand=tk.YES)
+    l1 = tk.Label(f,text="choose a base sheet:", font=("helvetica"),bg="#7EAFE0")
+    l1.pack(expand=tk.YES)
+    om = tk.OptionMenu(f,)
+
     w.mainloop()
 # end markov
 # save and quit function
