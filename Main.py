@@ -6,10 +6,6 @@ from analytics.new_melody import *
 import tkinter as tk
 from pathlib import Path
 # end of importation block
-# variable declaration
-title = ""
-sheet = ""
-# end variable declaration
 # database initialization
 if Path('pdata.json').is_file():
     partidic = readfilejson()
@@ -20,20 +16,20 @@ else:
 # sheet adder
 
 
-def nsv():
-    global partidic, title, sheet, w
-    partidic[title.get()] = sheet.get()
-    wi.destroy()
+def nsv(title,sheet):
+    global partidic, ws
+    partidic[title] = sheet
+    ws.destroy()
 
 
 def new_sheet():
-    global partidic, title, sheet, w
+    global partidic, title, sheet, ws
 
-    wi = tk.Tk()
-    wi.title("Adding New sheet")
-    title = tk.StringVar()
-    sheet = tk.StringVar()
-    cadre = tk.Frame(wi, bg="#7EAFE0")
+    ws = tk.Tk()
+    ws.title("Adding New sheet")
+    title = tk.StringVar(ws)
+    sheet = tk.StringVar(ws)
+    cadre = tk.Frame(ws, bg="#7EAFE0")
     cadre.pack(expand=tk.YES)
     l1 = tk.Label(cadre, text="enter the title:",
                   font=("helvetica"), bg="#7EAFE0")
@@ -45,7 +41,7 @@ def new_sheet():
     l2.pack(expand=tk.YES)
     E2 = tk.Entry(cadre, textvariable=sheet)
     E2.pack(expand=tk.YES)
-    validate = tk.Button(cadre, text="validate", command=lambda: nsv())
+    validate = tk.Button(cadre, text="validate", command=lambda: nsv(title.get(),sheet.get()))
     validate.pack(expand=tk.YES)
     cancel = tk.Button(cadre, text="Cancel", command=lambda: wi.destroy())
     cancel.pack(expand=tk.YES)
