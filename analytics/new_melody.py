@@ -2,7 +2,7 @@
 from random import randint
 from random import choice
 
-partition = "SOLc p Zc SOLn LAn SOLn DOn Zc SIb SOLc p Zc SOLn LAn SOLn REn Zc DOb SOLc p Zc SOLn SOLn MIn DOn Zc SIn LAn FAc p Zc FAn MIn DOn REn DOr"
+partition = "DOn DOn DOn REn MIb REb DOn MIn REn REn DOr Zr DOn DOn DOn REn MIb REb DOn MIn REn REn DOr Zr REn REn REn REn LAb LAb REn DOn SIn LAn SOLr Zr DOn DOn DOn REn MIb REb DOn MIn REn REn DOr"
 
 # This function creates 2 dictionaries that will help us apply markov law, one for the successive notes and one for
 # the notes themselves and their number of occurrences
@@ -50,11 +50,14 @@ def markov_partition(partition):
             note = dicnote[note[:2]][randomvalue]
         else:
             key = choice(list(dicnote))
+            # randomly chooses a note that still has successive notes to continue making the new_song partition
             randomvalue = randint(0, len(dicnote[key]) - 1)
             note = dicnote[key][randomvalue]
         dicnote[note[:2]].remove(note)
-        note = succdic[note[:2]][randint(0, len(succdic[note[:2]]) - 1)]
-        new_song.append(note)
+        if (len(succdic[note[:2]]) - 1) >= 0:
+            # the number generated cannot be lower than 0
+            note = succdic[note[:2]][randint(0, len(succdic[note[:2]]) - 1)]
+            new_song.append(note)
         for key, value in list(dicnote.items()):
             if not value:
                 del dicnote[key]
