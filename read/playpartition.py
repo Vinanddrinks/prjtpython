@@ -30,7 +30,8 @@ def shape_to_time(shape):
 
 
 def partition_to_list(partition):
-
+    # This function transforms a string partition in a list with notes and their shapes separated in different list
+    # values
     new_partition = ""
     for character in partition:
         if ascii("A") <= ascii(character) <= ascii('Z'):
