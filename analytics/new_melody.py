@@ -2,7 +2,7 @@
 from random import randint
 from random import choice
 
-partition = "SOLc SOLc SOLc LAn SOLn REn SOLc SOLc SOLc LAn SOLn REn DOc SIc LAc SIn DOc SIn LAn DOc SIc LAc SIn DOc SIn LAn SOLc SOLc SOLc LAn SOLn REn SOLc SOLc SOLc LAn SOLn REn"
+partition = "SOLc p Zc SOLn LAn SOLn DOn Zc SIb SOLc p Zc SOLn LAn SOLn REn Zc DOb SOLc p Zc SOLn SOLn MIn DOn Zc SIn LAn FAc p Zc FAn MIn DOn REn DOr"
 
 # This function creates 2 dictionaries that will help us apply markov law, one for the successive notes and one for
 # the notes themselves and their number of occurrences
@@ -20,7 +20,10 @@ def dicnotes(partition):
             # letters and use the enumerate to avoid index errors
             dicnote[note[:2]].append(note)
             if idx != len(split_part)-1:
-                succdic[note[:2]].append(split_part[idx+1])
+                if split_part[idx+1][0] != 'Z' and split_part[idx+1][0] != 'p':
+                    # We do not add the silences as successors we will keep them in the same position to keep the same
+                    # rythm
+                    succdic[note[:2]].append(split_part[idx+1])
     return dicnote, succdic
 
 
@@ -59,6 +62,27 @@ def markov_partition(partition):
     return new_song
 
 
-new_song = markov_partition(partition)
-print(new_song)
-print(len(new_song))
+def insert_silences(new_song, partition):
+    # since it is not said on the project folder we decided we would keep all the silences at their positions to keep
+    # the same rythm for our new song therefore this program adds the silences to the new partition at their respective
+    # places
+    silences_position = []
+    final_song = []
+    split_part = partition.split(" ")
+    for idx, val in enumerate(split_part):
+        # This loop checks where are the silences position in the main partition and get a tuple with its position and
+        # value
+        if val == "p" or val[:1] == "Z":
+            silences_position.append((idx, val))
+    for i in range(len(split_part)):
+        # This loop compares both lists and adds silences at their respective positions while creating the final song
+        # with the new_song variable gotten from the markov_partition() function
+        if silences_position and silences_position[0][0] == i:
+            silence = silences_position.pop(0)
+            final_song.append(silence[1])
+            # adds silence
+        elif new_song:
+            note = new_song.pop(0)
+            final_song.append(note)
+            # adds note
+    return final_song
