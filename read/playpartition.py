@@ -4,6 +4,7 @@ import numpy as np
 from time import sleep
 
 def note_to_hertz(note):
+    # This function converts a note to its assigned frequency
     dic ={
         "DO" : 264,
         "RE" : 297,
@@ -18,7 +19,7 @@ def note_to_hertz(note):
 
 
 def shape_to_time(shape):
-
+    # This function converts a shape to an amount of time in seconds
     dict_shape = {
         "r": 1,
         "b": 0.5,
@@ -46,6 +47,7 @@ def partition_to_list(partition):
 
 
 def play_note(note, shape):
+    # This function plays a note for a duration of time equal to its shape
     frequency_note = note_to_hertz(note)
     duration = np.abs(shape_to_time(shape))
     note_array = np.linspace(0, duration, int(duration*44100), False)
@@ -59,6 +61,7 @@ def play_note(note, shape):
 
 
 def play_partition(partition):
+    # Main function that plays a partition for the user
     note_list = ["SOL", "LA", "SI", "RE", "MI", "FA", "DO"]
     note_shape = ["r", "b", "n", "c", "p"]
     partition = partition_to_list(partition)
