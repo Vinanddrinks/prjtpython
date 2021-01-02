@@ -84,11 +84,3 @@ def play_partition(partition):
             sleep_time = shape_to_time(partition[index+1])
             sleep(sleep_time)
     return 0
-
-play_partition('REn LAp REn REn REn SOLn SOLp')
-
-
-
-
-
-
