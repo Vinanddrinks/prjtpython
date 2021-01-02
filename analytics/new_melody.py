@@ -86,3 +86,15 @@ def insert_silences(new_song, partition):
             final_song.append(note)
             # adds note
     return final_song
+
+
+def main_markov(partition):
+    # This function applies markov's law to a partition and returns it as a string ready to be read by the user.
+    new_song = markov_partition(partition)
+    final_song = insert_silences(new_song, partition)
+    string_song = ""
+    for element in final_song:
+        string_song = string_song + element + " "
+    string_song = string_song[:-1]
+    # We remove the last space so the string ends with a note and not a blank space " ".
+    return string_song
