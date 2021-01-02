@@ -49,16 +49,28 @@ def new_sheet():
 
     w.mainloop()
 # end sheet adder
+# play sheet
+def play():
+    w = tk.Tk()
+    w.title("play a music")
+    w.mainloop() 
+# end play sheet
+# markov
 def Markov():
     global partidic
     w = tk.Tk()
     w.title("Markov derivation")
     w.mainloop()
+# end markov
+# save and quit function
 def kill_save():
     global partidic,root
     writejson(partidic)
     root.destroy()
+# end save and quit function
 # end tkinter commands button functions
+
+
 # tkinter display
 # main window settings
 root = tk.Tk()
@@ -82,11 +94,12 @@ desc.pack(expand=tk.YES)
 kills = tk.Button(cadre,text=" Add new sheet ",font=("Helvetica", 18), bg = "#FFFFFF" ,fg = "#000000", command = lambda : new_sheet())
 kills.pack(expand=tk.YES)
 #end new sheet button
-
-# new sheet button
-killt = tk.Button(cadre,text=" tarkov derivation ",font=("Helvetica", 18), bg = "#FFFFFF" ,fg = "#000000", command = lambda : Markov())
+killp = tk.Button(cadre,text=" Play sheet ",font=("Helvetica", 18), bg = "#FFFFFF" ,fg = "#000000", command = lambda : play())
+killp.pack(expand=tk.YES)
+# Markov button
+killt = tk.Button(cadre,text=" Markov derivation ",font=("Helvetica", 18), bg = "#FFFFFF" ,fg = "#000000", command = lambda : Markov())
 killt.pack(expand=tk.YES)
-#end new sheet button
+#end Markov button
 # kill button
 killSb = tk.Button(cadre,text=" Exit & save program ",font=("Helvetica", 18), bg = "#FFFFFF" ,fg = "#000000", command = lambda : kill_save())
 killSb.pack(expand=tk.YES)
