@@ -48,11 +48,21 @@ def partition_to_list(partition):
 
 def play_note(note, shape):
     # This function plays a note for a duration of time equal to its shape
+    # fade, fade_in, fade_out help to slowly get to the sin value for the "fade" first and last values of my sin wave
+    # therefore helping the transition from a note to a silence to be smoother
+    fade = 100
+    fade_in = np.arange(0., 1., 1/fade)
+    fade_out = np.arange(1., 0., -1/fade)
     frequency_note = note_to_hertz(note)
     duration = np.abs(shape_to_time(shape))
     note_array = np.linspace(0, duration, int(duration*44100), False)
+    # note_array is the basis "duration" of the note
     # we create the note sine wave
     note = np.sin(frequency_note*note_array*2*np.pi)
+    # we set the first and last 100 values of the sin wave to get to their values slowly reducing therefore clicking
+    # sounds
+    note[:fade] = np.multiply(note[:fade], fade_in)
+    note[-fade:] = np.multiply(note[-fade:], fade_out)
     # the sound has to be on 16bit
     sound = note * (2**15 - 1) / np.max(np.abs(note))
     sound = sound.astype(np.int16)
@@ -75,7 +85,7 @@ def play_partition(partition):
             sleep(sleep_time)
     return 0
 
-
+play_partition('REn LAp REn REn REn SOLn SOLp')
 
 
 
