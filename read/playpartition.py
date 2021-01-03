@@ -3,6 +3,7 @@ import simpleaudio as sa
 import numpy as np
 from time import sleep
 
+
 def note_to_hertz(note):
     # This function converts a note to its assigned frequency
     dic ={
@@ -27,6 +28,16 @@ def shape_to_time(shape):
         "p": -0.125
     }
     return dict_shape[shape]
+
+
+def inversion_note(note):
+    # This function inverses a note
+    # We will use the definition of an inverted note that was given in the python project to invert a note which is we
+    # get the value of the note % len(inversion_list) of len(inversion_list) - note_position (that we get using .index
+    # function)
+    inversion_list = ["DO", "RE", "MI", "FA", "SOL", "LA", "SI"]
+    inversion_index = (len(inversion_list) - (inversion_list.index(note))) % (len(inversion_list))
+    return inversion_list[inversion_index]
 
 
 def transposition_note(note, transposition_value):
@@ -56,16 +67,26 @@ def partition_to_list(partition):
 
 def transposition_partition(partition, transposition_value):
     # This function transforms the partition in a transposed version of it ready to be played
-    notes = ["DO", "RE", "MI", "FA", "SOL", "LA", "SI", "Z"]
     partition = partition_to_list(partition)
     transposed_partition = []
-    string_transposed_partition = ""
     for note in partition:
         if ascii("A") <= ascii(note) <=ascii("Y"):
             transposed_partition.append(transposition_note(note, transposition_value))
         else:
             transposed_partition.append(note)
     return transposed_partition
+
+
+def inversion_partition(partition):
+    # This function transforms a partition in its inverted partition ready to be played
+    partition = partition_to_list(partition)
+    inverted_partition = []
+    for note in partition:
+        if ascii("A") <= ascii(note) <= ascii("Y"):
+            inverted_partition.append(inversion_note(note))
+        else:
+            inverted_partition.append(note)
+    return inverted_partition
 
 
 def play_note(note, shape):
@@ -112,6 +133,21 @@ def main_transposition_play(partition, transposition_value):
     # this function transposes and plays a partition with an user given transposition value
     note_list = ["SOL", "LA", "SI", "RE", "MI", "FA", "DO"]
     partition = transposition_partition(partition, transposition_value)
+    for index, element in enumerate(partition):
+        if element in note_list:
+            play_note(element, partition[index+1])
+        if element == "p":
+            sleep(0.125)
+        if element == "Z":
+            sleep_time = shape_to_time(partition[index+1])
+            sleep(sleep_time)
+    return 0
+
+
+def main_inversion_play(partition):
+    # This function inverts and plays a partition given or chosen by the user
+    note_list = ["SOL", "LA", "SI", "RE", "MI", "FA", "DO"]
+    partition = inversion_partition(partition)
     for index, element in enumerate(partition):
         if element in note_list:
             play_note(element, partition[index+1])
