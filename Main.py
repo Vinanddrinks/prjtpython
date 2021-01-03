@@ -69,6 +69,7 @@ def play():
     opm.pack(expand=tk.YES)
     E = tk.Entry(f,textvariable=tvc)
     E.pack(expand=tk.YES)
+    E.insert(tk.END,'0')
     P = tk.Button(f, text="Play", command=lambda: play_2(partidic[cursor.get()],optc.get(),int(tvc.get())))
     P.pack(expand=tk.YES)
     cancel=tk.Button(f, text="quit", command=lambda: w.destroy())
