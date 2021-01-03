@@ -59,6 +59,7 @@ def play():
     cursor = tk.StringVar(w)
     optc = tk.StringVar(w)
     tvc = tk.StringVar(w)
+    tvc.set(0)
     w.title("play a music")
     f = tk.Frame(w,bg = "#7EAFE0")
     f.pack(expand=tk.YES)
