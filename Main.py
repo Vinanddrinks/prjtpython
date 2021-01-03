@@ -52,20 +52,34 @@ def new_sheet():
 def play():
     global partidic
     keys = []
+    opt =["simple play","inversed play","transposed play"]
     for key in partidic:
         keys.append(key)
     w = tk.Tk()
     cursor = tk.StringVar(w)
+    optc = tk.StringVar(w)
+    tvc = tk.StringVar(w)
     w.title("play a music")
     f = tk.Frame(w,bg = "#7EAFE0")
     f.pack(expand=tk.YES)
     om = tk.OptionMenu(f, cursor, *keys)
     om.pack(expand=tk.YES)
-    P = tk.Button(f, text="Play", command=lambda: play_partition(partidic[cursor.get()]))
+    opm = tk.OptionMenu(f, optc, *opt)
+    opm.pack(expand=tk.YES)
+    E = tk.Entry(f,textvariable=tvc)
+    E.pack(expand=tk.YES)
+    P = tk.Button(f, text="Play", command=lambda: play_2(partidic[cursor.get()],optc.get(),int(tvc.get())))
     P.pack(expand=tk.YES)
     cancel=tk.Button(f, text="quit", command=lambda: w.destroy())
     cancel.pack(expand=tk.YES)
     w.mainloop()
+def play_2(partition,PC,tv):
+    if PC == "simple play":
+        play_partition(partition)
+    if PC == "inversed play":
+        main_inversion_play(partition)
+    if PC == "transposed play":
+        main_transposition_play(partition,tv) 
 # end play sheet
 # markov solo
 def Markov():
