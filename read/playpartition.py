@@ -13,7 +13,6 @@ def note_to_hertz(note):
         "SOL": 396,
         "LA" : 440,
         "SI" : 495,
-        "Z"  : -1,
     }
     return dic[note]
 
@@ -30,6 +29,15 @@ def shape_to_time(shape):
     return dict_shape[shape]
 
 
+def transposition_note(note, transposition_value):
+    # This function transposes a note
+    # We will get the transposition note by looking at the index of the note and then adding the transposition value
+    # while keeping it all modulo len(transposition_list) to avoid indexing errors
+    transposition_list = ["DO", "RE", "MI", "FA", "SOL", "LA", "SI"]
+    transposed_index = (transposition_list.index(note) + transposition_value) % (len(transposition_list))
+    return transposition_list[transposed_index]
+
+
 def partition_to_list(partition):
     # This function transforms a string partition in a list with notes and their shapes separated in different list
     # values
@@ -44,6 +52,20 @@ def partition_to_list(partition):
             new_partition = new_partition + character
     partition_list = new_partition.split()
     return partition_list
+
+
+def transposition_partition(partition, transposition_value):
+    # This function transforms the partition in a transposed version of it ready to be played
+    notes = ["DO", "RE", "MI", "FA", "SOL", "LA", "SI", "Z"]
+    partition = partition_to_list(partition)
+    transposed_partition = []
+    string_transposed_partition = ""
+    for note in partition:
+        if ascii("A") <= ascii(note) <=ascii("Y"):
+            transposed_partition.append(transposition_note(note, transposition_value))
+        else:
+            transposed_partition.append(note)
+    return transposed_partition
 
 
 def play_note(note, shape):
@@ -75,6 +97,21 @@ def play_partition(partition):
     note_list = ["SOL", "LA", "SI", "RE", "MI", "FA", "DO"]
     note_shape = ["r", "b", "n", "c", "p"]
     partition = partition_to_list(partition)
+    for index, element in enumerate(partition):
+        if element in note_list:
+            play_note(element, partition[index+1])
+        if element == "p":
+            sleep(0.125)
+        if element == "Z":
+            sleep_time = shape_to_time(partition[index+1])
+            sleep(sleep_time)
+    return 0
+
+
+def main_transposition_play(partition, transposition_value):
+    # this function transposes and plays a partition with an user given transposition value
+    note_list = ["SOL", "LA", "SI", "RE", "MI", "FA", "DO"]
+    partition = transposition_partition(partition, transposition_value)
     for index, element in enumerate(partition):
         if element in note_list:
             play_note(element, partition[index+1])
