@@ -52,7 +52,6 @@ def new_sheet():
 def play():
     global partidic
     keys = []
-
     for key in partidic:
         keys.append(key)
     w = tk.Tk()
@@ -68,7 +67,7 @@ def play():
     cancel.pack(expand=tk.YES)
     w.mainloop()
 # end play sheet
-# markov
+# markov solo
 def Markov():
     global partidic, w
     keys = []
@@ -100,7 +99,10 @@ def Derive(partition, title):
     global partidic,w
     partidic[title] = main_markov(partidic[partition])
     w.destroy()
-# end markov
+# end markov solo
+def Markovdb():
+    Windox = tk.Tk()
+    Windox.mainloop()
 # save and quit function
 def kill_save():
     global partidic, root
@@ -138,9 +140,14 @@ killp=tk.Button(cadre, text=" Play sheet ", font=("Helvetica", 18),
                 bg="#FFFFFF", fg="#000000", command=lambda: play())
 killp.pack(expand=tk.YES)
 # Markov button
-killt=tk.Button(cadre, text=" Markov derivation ", font=(
+killM=tk.Button(cadre, text=" Markov derivation based on one music ", font=(
     "Helvetica", 18), bg="#FFFFFF", fg="#000000", command=lambda: Markov())
-killt.pack(expand=tk.YES)
+killM.pack(expand=tk.YES)
+# end Markov button
+# Markov button
+killMdb=tk.Button(cadre, text=" Markov derivation based on the whole database ", font=(
+    "Helvetica", 18), bg="#FFFFFF", fg="#000000", command=lambda: Markovdb())
+killMdb.pack(expand=tk.YES)
 # end Markov button
 # kill button
 killSb=tk.Button(cadre, text=" Exit & save program ", font=(
@@ -153,5 +160,5 @@ killb=tk.Button(cadre, text=" Exit program ", font=(
 killb.pack(expand=tk.YES)
 # end kill button
 
-root.mainloop()  # indicateur de boucle sur la fenêtre principale
+root.mainloop()  # main loop indicator for tkinter window
 # end tkinter display
