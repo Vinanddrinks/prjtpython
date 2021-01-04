@@ -1,4 +1,6 @@
 #!/usr/bin/python
+# authors : Giuliano Riccardi
+
 from read.playpartition import *
 from files.readfile import *
 from analytics.new_melody import *
@@ -6,7 +8,7 @@ from pathlib import Path
 from random import randint
 
 def list_partidic(database_dictionary):
-    # Converts the database in a single partition list
+    # Converts the database in a single partition list takes as variable a dictionary and returns a list
     list_partition = []
     conversion_list = ""
     for key in database_dictionary:
@@ -26,7 +28,7 @@ def list_partidic(database_dictionary):
 
 def succdic(partition):
     # This function gets the successive notes from a note inside a partition just like we did for applying markov's law
-    # on a song
+    # on a song it takes as variable a string and returns a dictionary
     note_list = ['DO', 'RE', 'MI', 'FA', 'SO', 'LA', 'SI', 'Z', 'p']
     succdic = {
         'DO': [], 'RE': [], 'MI': [], 'FA': [], 'SO': [], 'LA': [], 'SI': [], 'p': [], 'Z': []
@@ -43,7 +45,8 @@ def succdic(partition):
 
 
 def db_markov(database_dictionary, partition_lenght):
-    # applies the markov law on the whole database
+    # applies the markov law on the whole database it takes as input the database as a dictionary and a user given
+    # length of partition (silences are counted as elements of the partition) and returns a string ready to be played
     full_dbpartition = list_partidic(database_dictionary)
     successive_dic = succdic(full_dbpartition)
     most_common_note = 'DO'

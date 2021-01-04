@@ -1,12 +1,13 @@
 #!/usr/bin/python
-# authors : Vincent Labouret, Guliano Riccardi
+# authors : Vincent Labouret, Giuliano Riccardi
 import simpleaudio as sa
 import numpy as np
 from time import sleep
 
 
 def note_to_hertz(note):
-    # This function converts a note to its assigned frequency
+    # This function converts a note to its assigned frequency it takes as input a string and returns an integer that is
+    # the hertz frequency of the note
     dic ={
         "DO" : 264,
         "RE" : 297,
@@ -20,7 +21,8 @@ def note_to_hertz(note):
 
 
 def shape_to_time(shape):
-    # This function converts a shape to an amount of time in seconds
+    # This function converts a shape to an amount of time in seconds takes as input a string and returns a float value
+    # that is the pause duration
     dict_shape = {
         "r": 1,
         "b": 0.5,
@@ -32,7 +34,7 @@ def shape_to_time(shape):
 
 
 def inversion_note(note):
-    # This function inverses a note
+    # This function inverses a note takes as input a string and returns a string
     # We will use the definition of an inverted note that was given in the python project to invert a note which is we
     # get the value of the note % len(inversion_list) of len(inversion_list) - note_position (that we get using .index
     # function)
@@ -42,7 +44,8 @@ def inversion_note(note):
 
 
 def transposition_note(note, transposition_value):
-    # This function transposes a note
+    # This function transposes a note it takes as input a string and an integer value and returns a string corresponding
+    # to the transposed value of the note
     # We will get the transposition note by looking at the index of the note and then adding the transposition value
     # while keeping it all modulo len(transposition_list) to avoid indexing errors
     transposition_list = ["DO", "RE", "MI", "FA", "SOL", "LA", "SI"]
@@ -52,7 +55,7 @@ def transposition_note(note, transposition_value):
 
 def partition_to_list(partition):
     # This function transforms a string partition in a list with notes and their shapes separated in different list
-    # values
+    # values it takes as input a string
     new_partition = ""
     for character in partition:
         if ascii("A") <= ascii(character) <= ascii('Z'):
@@ -67,7 +70,8 @@ def partition_to_list(partition):
 
 
 def transposition_partition(partition, transposition_value):
-    # This function transforms the partition in a transposed version of it ready to be played
+    # This function transforms the partition in a transposed version of it ready to be played it takes as input a string
+    # and an integer value (corresponding to the transposition value)
     partition = partition_to_list(partition)
     transposed_partition = []
     for note in partition:
@@ -79,7 +83,7 @@ def transposition_partition(partition, transposition_value):
 
 
 def inversion_partition(partition):
-    # This function transforms a partition in its inverted partition ready to be played
+    # This function transforms a partition in its inverted partition ready to be played it takes as input a string
     partition = partition_to_list(partition)
     inverted_partition = []
     for note in partition:
@@ -91,7 +95,8 @@ def inversion_partition(partition):
 
 
 def play_note(note, shape):
-    # This function plays a note for a duration of time equal to its shape
+    # This function plays a note for a duration of time equal to its shape it takes as input a string and another string
+    # and returns nothing because it plays a sound instead
     # fade, fade_in, fade_out help to slowly get to the sin value for the "fade" first and last values of my sin wave
     # therefore helping the transition from a note to a silence to be smoother
     fade = 100
@@ -115,7 +120,8 @@ def play_note(note, shape):
 
 
 def play_partition(partition):
-    # Main function that plays a partition for the user
+    # Main function that plays a partition for the user it takes as input a string and returns 0 if everything went
+    # according to plan during its launching (it will play the partition)
     note_list = ["SOL", "LA", "SI", "RE", "MI", "FA", "DO"]
     note_shape = ["r", "b", "n", "c", "p"]
     partition = partition_to_list(partition)
@@ -131,7 +137,8 @@ def play_partition(partition):
 
 
 def main_transposition_play(partition, transposition_value):
-    # this function transposes and plays a partition with an user given transposition value
+    # this function transposes and plays a partition with an user given transposition value takes as value a string and
+    # an integer and returns 0 if it was able to correctly play the string (returns sounds)
     note_list = ["SOL", "LA", "SI", "RE", "MI", "FA", "DO"]
     partition = transposition_partition(partition, transposition_value)
     for index, element in enumerate(partition):
@@ -146,7 +153,8 @@ def main_transposition_play(partition, transposition_value):
 
 
 def main_inversion_play(partition):
-    # This function inverts and plays a partition given or chosen by the user
+    # This function inverts and plays a partition given or chosen by the user takes as input a string and returns
+    # 0 if it was able to correctly play the inverted string given (it will return sounds)
     note_list = ["SOL", "LA", "SI", "RE", "MI", "FA", "DO"]
     partition = inversion_partition(partition)
     for index, element in enumerate(partition):
