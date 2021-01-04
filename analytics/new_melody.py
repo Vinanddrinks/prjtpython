@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# authors : Guliano Riccardi
 from random import randint
 from random import choice
 

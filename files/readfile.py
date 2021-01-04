@@ -1,3 +1,4 @@
+# authors : Vincent Labouret
 #lis le fichier partition.txt et le return en dictionaire 
 import io
 def readfiletxt():

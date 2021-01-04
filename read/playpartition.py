@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# authors : Vincent Labouret, Guliano Riccardi
 import simpleaudio as sa
 import numpy as np
 from time import sleep
