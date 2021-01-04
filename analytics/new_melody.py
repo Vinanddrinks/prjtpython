@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # authors : Guliano Riccardi
+# This file is in the project to contain all functions needed to manipulate statistics and Markov's law and create new
+# partitions ready to be played by the play()
 from random import randint
 from random import choice
-
-partition = "DOn DOn DOn REn MIb REb DOn MIn REn REn DOr Zr DOn DOn DOn REn MIb REb DOn MIn REn REn DOr Zr REn REn REn REn LAb LAb REn DOn SIn LAn SOLr Zr DOn DOn DOn REn MIb REb DOn MIn REn REn DOr"
 
 # This function creates 2 dictionaries that will help us apply markov law, one for the successive notes and one for
 # the notes themselves and their number of occurrences

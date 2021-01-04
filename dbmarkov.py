@@ -1,11 +1,13 @@
 #!/usr/bin/python
 # authors : Giuliano Riccardi
-
+# this file is here to apply Markov's Law on the whole database, it is not in the same file as the markov application
+# on a song to make it easier to import other functions to use in this folder and also use the database dictionary
 from read.playpartition import *
 from files.readfile import *
 from analytics.new_melody import *
 from pathlib import Path
 from random import randint
+
 
 def list_partidic(database_dictionary):
     # Converts the database in a single partition list takes as variable a dictionary and returns a list
@@ -41,7 +43,6 @@ def succdic(partition):
             if idx != len(partition)-1:
                 succdic[note[:1]].append(partition[idx+1])
     return succdic
-
 
 
 def db_markov(database_dictionary, partition_lenght):

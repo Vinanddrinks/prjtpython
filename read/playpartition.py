@@ -1,5 +1,8 @@
 #!/usr/bin/python
 # authors : Vincent Labouret, Giuliano Riccardi
+# This folder is in the project to contain all the functions needed to play a function and manipulate strings from
+# given to make them readable by the play() function and it does not take into account markov because it does not create
+# new partitions but manipulates already existing ones
 import simpleaudio as sa
 import numpy as np
 from time import sleep
