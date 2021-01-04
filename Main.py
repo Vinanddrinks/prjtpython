@@ -22,14 +22,15 @@ else:
 # sheet adder
 
 # validation of the fonction below using global to monitor Tk object type and the database
-
-
+# it allocate the new partition in the database (partidic (dictionary))
+# and close the ws wich is the event window
 def nsv(title, sheet):
     global partidic, ws
     partidic[title] = sheet
     ws.destroy()
 
 # create a window with a form to add a new entry in the partition dictionary
+# it take as input two string on for the title one for the sheet 
 
 
 def new_sheet():
@@ -39,13 +40,17 @@ def new_sheet():
     ws.geometry("300x300")
     ws.config(bg="#7EAFE0")
     ws.title("Adding New sheet")
+    #stringvar  is a type of string used in tkinter to monitor the value inputed in widget it depnd on a parent window
     title = tk.StringVar(ws)
     sheet = tk.StringVar(ws)
+    #Frame() allow to create a frame to organize elements position in a window
     cadre = tk.Frame(ws, bg="#7EAFE0")
     cadre.pack(expand=tk.YES)
+    #label() is a widget used to display text
     l1 = tk.Label(cadre, text="enter the title:",
                   font=("helvetica"), bg="#7EAFE0")
     l1.pack(expand=tk.YES)
+    #Entry() is a widget used to have a string input
     E1 = tk.Entry(cadre, textvariable=title)
     E1.pack(expand=tk.YES, fill=tk.X)
     l2 = tk.Label(cadre, text="enter the sheet:",
@@ -63,8 +68,8 @@ def new_sheet():
 # end sheet adder
 # play sheet
 # create a window with a form to play a sheet of the partition dictionary
-
-
+# getting from partidic the list of key 
+# allowing the user to choose between the songs and the method to play it with an integer input for transposition
 def play():
     global partidic
     keys = []
@@ -84,6 +89,8 @@ def play():
     l1 = tk.Label(f, text="choose a song:",
                   font=("helvetica"), bg="#7EAFE0")
     l1.pack(expand=tk.YES)
+    #OptionMenu allow to make a visual list of choices for a user using a list to define the options of the menu
+    # and a stringvar() to monitor the output
     om = tk.OptionMenu(f, cursor, *keys)
     om.pack(expand=tk.YES, fill=tk.X)
     l2 = tk.Label(f, text="choose a playing method:",
@@ -116,7 +123,7 @@ def play_2(partition, PC, tv):
 # end play sheet
 # markov solo
 # create a window with a form to create a new partition based on a sheet of the database
-
+# input : list of choice from partidic , string inpu for title 
 
 def Markov():
     global partidic, w
@@ -149,8 +156,8 @@ def Markov():
     cancel.pack(expand=tk.YES, fill=tk.X, pady=10)
     w.mainloop()
 # validation of the function above using global to access the database and the window variable
-
-
+# input string fot title and partition as the dictionary key
+# output new key and value in partidic it also destroy the event window w
 def Derive(partition, title):
     global partidic, w
     partidic[title] = main_markov(partidic[partition])
@@ -158,7 +165,7 @@ def Derive(partition, title):
 # end markov solo
 # markov db
 # create a window with a form to create a new partition based on the database
-
+# input integer: length of the partition, string: title of the new partition  
 
 def Markovdb():
     global Windox
@@ -187,7 +194,7 @@ def Markovdb():
     cancel.pack(expand=tk.YES, fill=tk.X, pady=10)
     Windox.mainloop()
 # validation of the above function using global to access database and widow variable
-
+# output new dictionary entry with the partitions
 
 def mdb(title, length):
     global partidic, Windox
@@ -196,7 +203,7 @@ def mdb(title, length):
 
 # end markov db
 # save and quit function
-# create and write the json database and breaking the mainloop of the program in order to stop it
+# create and write the dictionary partidic  in json file and breaking the mainloop of the program in order to stop it
 
 
 def kill_save():

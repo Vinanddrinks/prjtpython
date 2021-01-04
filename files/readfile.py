@@ -1,5 +1,5 @@
 # authors : Vincent Labouret
-#lis le fichier partition.txt et le return en dictionaire 
+#open partitions.txt and return it's content as a dictionary (key = music title value = sheet)
 import io
 def readfiletxt():
     partitions = open("partitions.txt")
@@ -14,14 +14,14 @@ def readfiletxt():
         ln += 1
     partitions.close()
     return partidic
-#retourne le dictionaire stocké dans pdata.json
+#open pdata.json and return the loaded dictionary
 def readfilejson():
     import json
     with open ('pdata.json') as json_file:
         data = json.load(json_file)
         return data
 
-#écris un dictionnaire dans pdata.json
+#accept partition as a dictionary and create or overwrite pdata.json with this dictionary as content 
 def writejson(partitions):
     import json
     with open("pdata.json", "w") as write_file:
