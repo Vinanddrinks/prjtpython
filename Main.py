@@ -26,6 +26,8 @@ def new_sheet():
     global partidic, title, sheet, ws
 
     ws = tk.Tk()
+    ws.geometry("300x300")
+    ws.config(bg="#7EAFE0")
     ws.title("Adding New sheet")
     title = tk.StringVar(ws)
     sheet = tk.StringVar(ws)
@@ -35,16 +37,16 @@ def new_sheet():
                   font=("helvetica"), bg="#7EAFE0")
     l1.pack(expand=tk.YES)
     E1 = tk.Entry(cadre, textvariable=title)
-    E1.pack(expand=tk.YES)
+    E1.pack(expand=tk.YES,fill=tk.X)
     l2 = tk.Label(cadre, text="enter the sheet:",
                   font=("helvetica"), bg="#7EAFE0")
     l2.pack(expand=tk.YES)
     E2 = tk.Entry(cadre, textvariable=sheet)
-    E2.pack(expand=tk.YES)
-    validate = tk.Button(cadre, text="validate", command=lambda: nsv(title.get(),sheet.get()))
-    validate.pack(expand=tk.YES)
-    cancel = tk.Button(cadre, text="Cancel", command=lambda: wi.destroy())
-    cancel.pack(expand=tk.YES)
+    E2.pack(expand=tk.YES,fill=tk.X)
+    validate = tk.Button(cadre, text="Validate", command=lambda: nsv(title.get(),sheet.get()))
+    validate.pack(expand=tk.YES,fill=tk.X,pady=10)
+    cancel = tk.Button(cadre, text="Cancel", command=lambda: ws.destroy())
+    cancel.pack(expand=tk.YES,fill=tk.X,pady=10)
 
     w.mainloop()
 # end sheet adder
@@ -56,6 +58,8 @@ def play():
     for key in partidic:
         keys.append(key)
     w = tk.Tk()
+    w.geometry("300x300")
+    w.config(bg="#7EAFE0")
     cursor = tk.StringVar(w)
     optc = tk.StringVar(w)
     tvc = tk.StringVar(w)
@@ -63,17 +67,26 @@ def play():
     w.title("play a music")
     f = tk.Frame(w,bg = "#7EAFE0")
     f.pack(expand=tk.YES)
+    l1 = tk.Label(f, text="choose a song:",
+                  font=("helvetica"), bg="#7EAFE0")
+    l1.pack(expand=tk.YES)
     om = tk.OptionMenu(f, cursor, *keys)
-    om.pack(expand=tk.YES)
+    om.pack(expand=tk.YES,fill=tk.X)
+    l2 = tk.Label(f, text="choose a playing method:",
+                  font=("helvetica"), bg="#7EAFE0")
+    l2.pack(expand=tk.YES)
     opm = tk.OptionMenu(f, optc, *opt)
-    opm.pack(expand=tk.YES)
+    opm.pack(expand=tk.YES,fill=tk.X)
+    l3 = tk.Label(f, text="choose a transposition value:",
+                  font=("helvetica"), bg="#7EAFE0")
+    l3.pack(expand=tk.YES)
     E = tk.Entry(f,textvariable=tvc)
-    E.pack(expand=tk.YES)
+    E.pack(expand=tk.YES,fill=tk.X)
     E.insert(tk.END,'0')
     P = tk.Button(f, text="Play", command=lambda: play_2(partidic[cursor.get()],optc.get(),int(tvc.get())))
-    P.pack(expand=tk.YES)
+    P.pack(expand=tk.YES,fill=tk.X,pady=10)
     cancel=tk.Button(f, text="quit", command=lambda: w.destroy())
-    cancel.pack(expand=tk.YES)
+    cancel.pack(expand=tk.YES,fill=tk.X,pady=10)
     w.mainloop()
 def play_2(partition,PC,tv):
     if PC == "simple play":
@@ -91,6 +104,8 @@ def Markov():
     for key in partidic:
         keys.append(key)
     w = tk.Tk()
+    w.geometry("300x300")
+    w.config(bg="#7EAFE0")
     cursor = tk.StringVar(w)
     title = tk.StringVar(w)
     w.title("Markov derivation")
@@ -100,25 +115,29 @@ def Markov():
                   font=("helvetica"), bg="#7EAFE0")
     l1.pack(expand=tk.YES)
     om = tk.OptionMenu(f, cursor, *keys)
-    om.pack(expand=tk.YES)
+    om.pack(expand=tk.YES,fill=tk.X)
     l2 = tk.Label(f, text="choose a title:",
                   font=("helvetica"), bg="#7EAFE0")
     l2.pack(expand=tk.YES)
     E = tk.Entry(f,textvariable= title)
     E.pack(expand=tk.YES)
     derive = tk.Button(f, text="Derive", command=lambda: Derive(cursor.get(), title.get()))
-    derive.pack(expand=tk.YES)
+    derive.pack(expand=tk.YES,fill=tk.X,pady=10)
     cancel=tk.Button(f, text="Cancel", command=lambda: w.destroy())
-    cancel.pack(expand=tk.YES)
+    cancel.pack(expand=tk.YES,fill=tk.X,pady=10)
     w.mainloop()
 def Derive(partition, title):
     global partidic,w
     partidic[title] = main_markov(partidic[partition])
     w.destroy()
 # end markov solo
+# markov db
 def Markovdb():
     Windox = tk.Tk()
+    Windox.geometry("300x300")
+    Windox.config(bg="#7EAFE0")
     Windox.mainloop()
+# end markov db
 # save and quit function
 def kill_save():
     global partidic, root
@@ -142,7 +161,7 @@ root.config(bg="#7EAFE0")
 cadre=tk.Frame(root, bg="#7EAFE0")
 cadre.pack(expand=tk.YES)
 # description title
-desc=tk.Label(cadre, text="Welcome to Music and Statistic, a program to derive melody from other's", font=(
+desc=tk.Label(cadre, text="Welcome to Music and Statistic, a program to derive melody from others", font=(
     "Helvetica", 20), bg="#7EAFE0")
 desc.pack(expand=tk.YES)
 # end description title
@@ -150,30 +169,30 @@ desc.pack(expand=tk.YES)
 # new sheet button
 kills=tk.Button(cadre, text=" Add new sheet ", font=(
     "Helvetica", 18), bg="#FFFFFF", fg="#000000", command=lambda: new_sheet())
-kills.pack(expand=tk.YES)
+kills.pack(expand=tk.YES,fill=tk.X,pady=25)
 # end new sheet button
 killp=tk.Button(cadre, text=" Play sheet ", font=("Helvetica", 18),
                 bg="#FFFFFF", fg="#000000", command=lambda: play())
-killp.pack(expand=tk.YES)
+killp.pack(expand=tk.YES,fill=tk.X)
 # Markov button
 killM=tk.Button(cadre, text=" Markov derivation based on one music ", font=(
     "Helvetica", 18), bg="#FFFFFF", fg="#000000", command=lambda: Markov())
-killM.pack(expand=tk.YES)
+killM.pack(expand=tk.YES,fill=tk.X,pady=25)
 # end Markov button
 # Markov button
 killMdb=tk.Button(cadre, text=" Markov derivation based on the whole database ", font=(
     "Helvetica", 18), bg="#FFFFFF", fg="#000000", command=lambda: Markovdb())
-killMdb.pack(expand=tk.YES)
+killMdb.pack(expand=tk.YES,fill=tk.X)
 # end Markov button
 # kill button
 killSb=tk.Button(cadre, text=" Exit & save program ", font=(
     "Helvetica", 18), bg="#FFFFFF", fg="#000000", command=lambda: kill_save())
-killSb.pack(expand=tk.YES)
+killSb.pack(expand=tk.YES,fill=tk.X,pady=25)
 # end kill button
 # kill button
 killb=tk.Button(cadre, text=" Exit program ", font=(
     "Helvetica", 18), bg="#FFFFFF", fg="#000000", command=lambda: root.destroy())
-killb.pack(expand=tk.YES)
+killb.pack(expand=tk.YES,fill=tk.X)
 # end kill button
 
 root.mainloop()  # main loop indicator for tkinter window
