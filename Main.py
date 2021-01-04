@@ -49,7 +49,7 @@ def new_sheet():
     cancel = tk.Button(cadre, text="Cancel", command=lambda: ws.destroy())
     cancel.pack(expand=tk.YES,fill=tk.X,pady=10)
 
-    w.mainloop()
+    ws.mainloop()
 # end sheet adder
 # play sheet
 def play():
@@ -86,7 +86,7 @@ def play():
     E.insert(tk.END,'0')
     P = tk.Button(f, text="Play", command=lambda: play_2(partidic[cursor.get()],optc.get(),int(tvc.get())))
     P.pack(expand=tk.YES,fill=tk.X,pady=10)
-    cancel=tk.Button(f, text="quit", command=lambda: w.destroy())
+    cancel=tk.Button(f, text="Quit", command=lambda: w.destroy())
     cancel.pack(expand=tk.YES,fill=tk.X,pady=10)
     w.mainloop()
 def play_2(partition,PC,tv):

@@ -1,4 +1,5 @@
 #lis le fichier partition.txt et le return en dictionaire 
+import io
 def readfiletxt():
     partitions = open("partitions.txt")
     partidic = {}
@@ -12,7 +13,7 @@ def readfiletxt():
         ln += 1
     partitions.close()
     return partidic
-#retourne le dictionaire stocké dans p data.json
+#retourne le dictionaire stocké dans pdata.json
 def readfilejson():
     import json
     with open ('pdata.json') as json_file:
