@@ -5,15 +5,6 @@ from analytics.new_melody import *
 from pathlib import Path
 from random import randint
 
-
-# database initialization
-if Path('pdata.json').is_file():
-    partidic = readfilejson()
-else:
-    partidic = readfiletxt()
-# end database initialization
-
-
 def list_partidic(database_dictionary):
     # Converts the database in a single partition list
     list_partition = []

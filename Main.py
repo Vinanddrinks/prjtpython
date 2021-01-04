@@ -4,6 +4,7 @@ from read.playpartition import *
 from files.readfile import *
 from analytics.new_melody import *
 import tkinter as tk
+from dbmarkov import *
 from pathlib import Path
 # end of importation block
 # database initialization
@@ -133,10 +134,35 @@ def Derive(partition, title):
 # end markov solo
 # markov db
 def Markovdb():
+    global Windox
     Windox = tk.Tk()
     Windox.geometry("300x300")
     Windox.config(bg="#7EAFE0")
+    f = tk.Frame(Windox, bg="#7EAFE0")
+    f.pack(expand=tk.YES)
+    l1 = tk.Label(f, text="choose a title:",
+                  font=("helvetica"), bg="#7EAFE0")
+    l1.pack(expand=tk.YES)
+    cursor_t = tk.StringVar(Windox)
+    cursor_l = tk.StringVar(Windox)
+    cursor_l.set("30")
+    E = tk.Entry(f,textvariable=cursor_t)
+    E.pack(expand=tk.YES,fill=tk.X)
+    l1 = tk.Label(f, text="choose a length in note number:",
+                  font=("helvetica"), bg="#7EAFE0")
+    l1.pack(expand=tk.YES)
+    E1 = tk.Entry(f,textvariable=cursor_l)
+    E1.pack(expand=tk.YES,fill=tk.X)
+    validate = tk.Button(f, text="Derive", command=lambda: mdb(cursor_t.get(),int(cursor_l.get())))
+    validate.pack(expand=tk.YES,fill=tk.X,pady=10)
+    cancel=tk.Button(f, text="Cancel", command=lambda: Windox.destroy())
+    cancel.pack(expand=tk.YES,fill=tk.X,pady=10)
     Windox.mainloop()
+def mdb(title,length):
+    global partidic,Windox
+    partidic[title]=db_markov(partidic,length)
+    Windox.destroy()
+
 # end markov db
 # save and quit function
 def kill_save():
