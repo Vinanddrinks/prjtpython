@@ -1,6 +1,5 @@
 # authors : Vincent Labouret
 #open partitions.txt and return it's content as a dictionary (key = music title value = sheet)
-import io
 def readfiletxt():
     partitions = open("partitions.txt")
     partidic = {}
