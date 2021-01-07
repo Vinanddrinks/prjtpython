@@ -31,7 +31,6 @@ def shape_to_time(shape):
         "b": 0.5,
         "n": 0.250,
         "c": 0.125,
-        "p": -0.125
     }
     return dict_shape[shape]
 
