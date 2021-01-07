@@ -1,7 +1,7 @@
 # authors : Vincent Labouret
 #open partitions.txt and return it's content as a dictionary (key = music title value = sheet)
 def readfiletxt():
-    partitions = open("partitions.txt")
+    partitions = open("partitions.txt",encoding="utf-8")
     partidic = {}
     ln = 0
     for line in enumerate(partitions):
