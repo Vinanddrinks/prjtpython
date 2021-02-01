@@ -102,3 +102,6 @@ def main_markov(partition):
     string_song = string_song[:-1]
     # We remove the last space so the string ends with a note and not a blank space " ".
     return string_song
+
+
+test
